@@ -11,8 +11,8 @@ public class Player304 : MonoBehaviour
 
     //public Transform transform;
     public Rigidbody rigidbody;
-    private CapsuleCollider capsuleCollider;
-    private float defaultColliderHeight;
+    private MeshCollider meshCollider;
+    public float defaultColliderHeight;
     public float healthPoints;
 
    
@@ -24,8 +24,8 @@ public class Player304 : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         position = transform.position;
-        capsuleCollider = GetComponent<CapsuleCollider>();
-        defaultColliderHeight = capsuleCollider.height;
+        meshCollider = GetComponent<MeshCollider>();
+        //defaultColliderHeight = meshCollider.height;
     }
 
     // Update is called once per frame

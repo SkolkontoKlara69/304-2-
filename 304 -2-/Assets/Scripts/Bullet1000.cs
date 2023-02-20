@@ -53,7 +53,7 @@ public class Bullet1000 : MonoBehaviour
 
         
         //   ---DESPAWN---
-        if (gameObject.name != "Bullet1000")
+        if (gameObject.name != "Bullet")
         {
             Destroy(gameObject, despawnRate);
         }

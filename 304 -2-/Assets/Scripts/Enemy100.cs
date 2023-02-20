@@ -56,10 +56,11 @@ public class Enemy100 : MonoBehaviour
     {
         float singleStep = movingSpeed * Time.deltaTime;
         targetDirection = targetTransform.position- transform.position;
-
+        
         newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
 
         transform.rotation = Quaternion.LookRotation(newDirection);
+         
 
         //Debug line so that you are able to see where the enemy is looking
         Debug.DrawRay(transform.position, newDirection, Color.red);

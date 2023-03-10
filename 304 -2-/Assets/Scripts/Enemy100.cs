@@ -40,7 +40,7 @@ public class Enemy100 : MonoBehaviour
         else if(Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Shoot();
+            //Shoot();
         }
 
         
@@ -53,7 +53,11 @@ public class Enemy100 : MonoBehaviour
         damage = bullet.GetComponent<Bullet1000>().damage;
         
     }
-    
+
+    void TakeDamage()
+    {
+
+    }
 }
 
 

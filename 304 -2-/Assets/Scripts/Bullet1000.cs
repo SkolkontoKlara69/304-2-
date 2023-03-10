@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Bullet1000 : MonoBehaviour
 {
-    
+
     //   ---TARGET---
     //[HideInInspector]
     public Player304 player;
+    public Enemy100 shooter;
     public GameObject target;
     public Transform targetTransform;
     public Collider targetCollider;
@@ -24,13 +25,17 @@ public class Bullet1000 : MonoBehaviour
     //   ---FLOOR---
 
     public Transform floorTransform;
-   
-    
+
+    public Vector3 newDirection;
+    private Vector3 targetDirection;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        hit = false;   
+        hit = false;
+
     }
 
     // Update is called once per frame
@@ -51,19 +56,21 @@ public class Bullet1000 : MonoBehaviour
         }
         */
 
-        
+
         //   ---DESPAWN---
         if (gameObject.name != "Bullet")
         {
             Destroy(gameObject, despawnRate);
         }
-        
 
-        rb.AddForce(force);
+        //force = (- shooter.newDirection.x, - shooter.newDirection.y, - shooter.newDirection.z);
+        //force = -newDirection;
+        //rb.AddForce(force);
 
+        rb.AddRelativeForce(force);
 
         HitPlayer();
-        
+
     }
     void HitPlayer()
     {
@@ -76,5 +83,9 @@ public class Bullet1000 : MonoBehaviour
             hit = true;
         }
     }
-    
+    void ShootOut()
+    {
+
+        
+    }
 }

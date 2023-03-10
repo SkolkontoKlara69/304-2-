@@ -14,7 +14,7 @@ public class Enemy100 : MonoBehaviour
     private float nextFire;
     public float fireRate;
 
-    private Vector3 newDirection;
+    public Vector3 newDirection;
     private Vector3 targetDirection;
 
 
@@ -43,29 +43,17 @@ public class Enemy100 : MonoBehaviour
             Shoot();
         }
 
-        RotateToTarget();
         
+        transform.LookAt(targetTransform);
         
     }
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(newDirection));
         damage = bullet.GetComponent<Bullet1000>().damage;
-    }
-    void RotateToTarget()
-    {
-        float singleStep = movingSpeed * Time.deltaTime;
-        targetDirection = targetTransform.position- transform.position;
         
-        newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
-
-        transform.rotation = Quaternion.LookRotation(newDirection);
-         
-
-        //Debug line so that you are able to see where the enemy is looking
-        Debug.DrawRay(transform.position, newDirection, Color.red);
-
     }
+    
 }
 
 

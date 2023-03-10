@@ -331,7 +331,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2591bbaeabc9e714fb1003ebf634d46e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2591bbaeabc9e714fb1003ebf634d46e, type: 3}
       propertyPath: m_LocalScale.x
@@ -9236,7 +9236,7 @@ Transform:
   m_Children:
   - {fileID: 7006995980517700745}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2909925760061903708
 MonoBehaviour:
@@ -9257,6 +9257,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8964298304995374339}
   bulletRb: {fileID: 8964298304995374340}
   fireRate: 2
+  newDirection: {x: 0, y: 0, z: 0}
 --- !u!33 &2911981353031664279
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -20935,7 +20936,7 @@ Transform:
   - {fileID: 1243130125}
   - {fileID: 1317879012}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &6901711419886411963
 MeshCollider:
@@ -26524,7 +26525,7 @@ Transform:
   - {fileID: 8276854867888953545}
   - {fileID: 5611225150065158780}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8598934779359912767
 GameObject:
@@ -28018,6 +28019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7506493216156628539}
+  shooter: {fileID: 2909925760061903708}
   target: {fileID: 5771892407116526394}
   targetTransform: {fileID: 7556003574577974975}
   targetCollider: {fileID: 7506493216156628537}

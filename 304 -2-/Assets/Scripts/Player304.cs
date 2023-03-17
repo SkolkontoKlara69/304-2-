@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Player304 : MonoBehaviour
 {
-
     public float movingSpeed = 10f;
     public Vector3 position;
 
@@ -15,9 +14,29 @@ public class Player304 : MonoBehaviour
     public float defaultColliderHeight;
     public float healthPoints;
 
-   
+    float rotationX = -90f;
+    float rotationY = 0f;
+    
+    public float sensitivity;
 
+    Vector3 moveDirection;
 
+    public Transform orientation;
+
+    /*
+    public float playerHeight;
+
+    bool readyToJump;
+    public float jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
+    bool isGrounded;
+    public LayerMask whatIsGround;
+
+    public KeyCode jumpKey = KeyCode.Space;
+
+    public float groundDrag;
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +51,8 @@ public class Player304 : MonoBehaviour
     void Update()
     {
         //WASD
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
 
@@ -41,7 +60,14 @@ public class Player304 : MonoBehaviour
 
         rigidbody.MovePosition(transform.position + movement * Time.deltaTime);
 
+        rotationY += Input.GetAxis("Mouse X") * sensitivity;
+        transform.localEulerAngles = new Vector3(rotationX, rotationY, 0);
 
+        Vector3 playerDirection = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+
+        moveDirection = orientation.forward.normalized * verticalInput + orientation.right * horizontalInput;
+
+        rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f, ForceMode.Force);
     }
 
     public void TakeDamage(float damage)

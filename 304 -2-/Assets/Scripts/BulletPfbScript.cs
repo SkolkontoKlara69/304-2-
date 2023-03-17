@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletPfbScript : MonoBehaviour
 {
     //   ---TARGET---
     //[HideInInspector]
+    [Header("Target")]
     public Player304 player;
     public Enemy100 shooter;
     public GameObject target;
@@ -14,6 +13,7 @@ public class BulletPfbScript : MonoBehaviour
     public float hitbox;
 
     //   ---BULLET---
+    [Header("Bullet")]
     public Vector3 force;
     public Rigidbody rb;
     public float damage;
@@ -22,6 +22,7 @@ public class BulletPfbScript : MonoBehaviour
     public bool hit;
 
     //   ---FLOOR---
+    [Header("Floor")]
 
     public Transform floorTransform;
 
@@ -40,17 +41,23 @@ public class BulletPfbScript : MonoBehaviour
 
         HitPlayer();
     }
-   
+
 
     void HitPlayer()
     {
-        float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
-        float distanceToFloor = transform.position.y - floorTransform.position.y;
-
-        if (distanceToTarget < hitbox && target.name == "Player304" && hit == false && distanceToFloor > 0.5f)
+        
+        if (targetTransform != null)
         {
-            player.TakeDamage(damage);
-            hit = true;
+            float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
+            float distanceToFloor = transform.position.y - floorTransform.position.y;
+
+
+            if (distanceToTarget < hitbox && target.name == "Player304" && hit == false && distanceToFloor > 0.5f)
+            {
+                player.TakeDamage(damage);
+                hit = true;
+            }
         }
+       
     }
 }

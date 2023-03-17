@@ -11,7 +11,6 @@ public class ButtonManager : MonoBehaviour
     int pressNmbE;
     int pressNmbC;
 
-
     public void OnStartButtonPress()
     {
         DebugLogPressNmb("Start", pressNmbS);

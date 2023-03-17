@@ -16,11 +16,19 @@ public class Player304 : MonoBehaviour
 
     float rotationX = -90f;
     float rotationY = 0f;
+<<<<<<< Updated upstream
     
     public float sensitivity;
 
     Vector3 moveDirection;
 
+=======
+
+    public float sensitivity;
+
+    Vector3 moveDirection;
+
+>>>>>>> Stashed changes
     public Transform orientation;
 
     /*
@@ -72,7 +80,7 @@ public class Player304 : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        healthPoints =- damage;
+        healthPoints = -damage;
         Debug.Log("aj");
     }
 }

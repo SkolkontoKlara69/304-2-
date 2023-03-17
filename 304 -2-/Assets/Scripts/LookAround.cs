@@ -22,7 +22,11 @@ public class LookAround : MonoBehaviour
     private void Update()
     {
         // get mouse input
+<<<<<<< Updated upstream
         float mouseX = Input.GetAxisRaw("Mouse X") * sensX;  
+=======
+        float mouseX = Input.GetAxisRaw("Mouse X") * sensX;
+>>>>>>> Stashed changes
         float mouseY = Input.GetAxisRaw("Mouse Y") * sensY;
 
         yRotation += mouseX;

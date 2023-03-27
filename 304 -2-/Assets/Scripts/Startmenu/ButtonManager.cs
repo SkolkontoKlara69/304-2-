@@ -13,25 +13,27 @@ public class ButtonManager : MonoBehaviour
 
     public void OnStartButtonPress()
     {
-        DebugLogPressNmb("Start", pressNmbS);
+        pressNmbS =  DebugLogPressNmb("Start", pressNmbS);
         SceneManager.LoadScene("Prison level utomhus");
     }
 
 
     public void OnCreditsButtonPress()
     {
-        DebugLogPressNmb("Credits", pressNmbC);
+        pressNmbC = DebugLogPressNmb("Credits", pressNmbC);
+
     }
 
 
     public void OnExitButtonPress()
     {
-        DebugLogPressNmb("Exit", pressNmbE);
+        pressNmbE = DebugLogPressNmb("Exit", pressNmbE);
     }
 
-    void DebugLogPressNmb(string buttonName, int pressNmb)
+    int DebugLogPressNmb(string buttonName, int pressNmb)
     {
         pressNmb++;
         Debug.Log(buttonName + " clicked " + pressNmb + " times.");
+        return pressNmb;
     }
 }

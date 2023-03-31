@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshCollider))]
 public class Player304 : MonoBehaviour
 {
     public float movingSpeed = 10f;
@@ -10,8 +11,8 @@ public class Player304 : MonoBehaviour
 
     //public Transform transform;
     public Rigidbody rigidbody;
-    private MeshCollider meshCollider;
-    public float defaultColliderHeight;
+    private CapsuleCollider capsuleCollider;
+    private float defaultColliderHeight;
     public float healthPoints;
 
     float rotationX = -90f;
@@ -23,33 +24,45 @@ public class Player304 : MonoBehaviour
 
     public Transform orientation;
 
-    /*
     public float playerHeight;
 
     bool readyToJump;
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+
     bool isGrounded;
     public LayerMask whatIsGround;
 
     public KeyCode jumpKey = KeyCode.Space;
 
     public float groundDrag;
-    */
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         position = transform.position;
-        meshCollider = GetComponent<MeshCollider>();
-        //defaultColliderHeight = meshCollider.height;
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        defaultColliderHeight = capsuleCollider.height;
+
+        isGrounded = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isGrounded == true)
+        {
+            rigidbody.drag = groundDrag;
+        }
+        else
+        {
+            rigidbody.drag = 0;
+        }
+
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
         //WASD
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
@@ -68,11 +81,46 @@ public class Player304 : MonoBehaviour
         moveDirection = orientation.forward.normalized * verticalInput + orientation.right * horizontalInput;
 
         rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f, ForceMode.Force);
+
+        if (isGrounded == true)
+        {
+            rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f, ForceMode.Force);
+        }
+        else if (isGrounded == false)
+        {
+            rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+
+        if (Input.GetKey(jumpKey) && readyToJump == true && isGrounded)
+        {
+            Jump();
+
+            readyToJump = false;
+
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
+    }
+
+    private void Jump()
+    {
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
+
+        rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void ResetJump()
+    {
+        readyToJump = true;
     }
 
     public void TakeDamage(float damage)
     {
-        healthPoints =- damage;
+        healthPoints = -damage;
         Debug.Log("aj");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        isGrounded = true;
     }
 }

@@ -13,7 +13,7 @@ public class ButtonManager : MonoBehaviour
 
     public void OnStartButtonPress()
     {
-        pressNmbS =  DebugLogPressNmb("Start", pressNmbS);
+        pressNmbS = DebugLogPressNmb("Start", pressNmbS);
         SceneManager.LoadScene("Prison level utomhus");
     }
 
@@ -21,7 +21,6 @@ public class ButtonManager : MonoBehaviour
     public void OnCreditsButtonPress()
     {
         pressNmbC = DebugLogPressNmb("Credits", pressNmbC);
-
     }
 
 

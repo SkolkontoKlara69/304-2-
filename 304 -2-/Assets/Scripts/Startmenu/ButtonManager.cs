@@ -10,6 +10,7 @@ public class ButtonManager : MonoBehaviour
     int pressNmbS;
     int pressNmbE;
     int pressNmbC;
+    int pressNmbM;
 
     public void OnStartButtonPress()
     {
@@ -21,12 +22,20 @@ public class ButtonManager : MonoBehaviour
     public void OnCreditsButtonPress()
     {
         pressNmbC = DebugLogPressNmb("Credits", pressNmbC);
+        SceneManager.LoadScene("Credits");
     }
-
 
     public void OnExitButtonPress()
     {
         pressNmbE = DebugLogPressNmb("Exit", pressNmbE);
+        Application.Quit();
+        
+    }
+
+    public void OnMenuButtonPress()
+    {
+        pressNmbM = DebugLogPressNmb("Start Menu", pressNmbM);
+        SceneManager.LoadScene("Start menu");
     }
 
     int DebugLogPressNmb(string buttonName, int pressNmb)

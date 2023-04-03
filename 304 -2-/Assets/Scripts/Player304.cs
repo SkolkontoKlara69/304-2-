@@ -91,7 +91,7 @@ public class Player304 : MonoBehaviour
             rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
-        if (Input.GetKey(jumpKey) && readyToJump == true && isGrounded)
+        if (Input.GetKey(jumpKey) && readyToJump == true /*&& isGrounded*/)
         {
             Jump();
 
@@ -103,7 +103,7 @@ public class Player304 : MonoBehaviour
 
     private void Jump()
     {
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpForce*Time.deltaTime, rigidbody.velocity.z);
 
         rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }

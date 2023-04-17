@@ -10,6 +10,9 @@ public class PauseManager : MonoBehaviour
     //vilken knapp som ska tryckas ned (just nu P)
     KeyCode pauseButton = KeyCode.P;
 
+
+    public GameObject pauseMenu; 
+
     /// <summary>
     /// För att lägga in ett villkor i en annan kod för att bero på om spelet är pausat gör man såhär:
     /// 1. lägg in: 
@@ -50,10 +53,17 @@ public class PauseManager : MonoBehaviour
         if (paused == true)
         {
             Time.timeScale = 0f; // Pausar spelet (tiden)
+
+            //Gör canvasen för paus-menyn synlig
+            pauseMenu.SetActive(true); 
         }
         else
         {
             Time.timeScale = 1f; // Återupptar spelet (tiden går normalt)
+
+
+            //Gör canvasen för paus-menyn osynlig
+            pauseMenu.SetActive(false);
         }
     }
 }

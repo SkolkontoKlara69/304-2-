@@ -18,6 +18,8 @@ public class Enemy100 : MonoBehaviour
     private Vector3 targetDirection;
 
 
+    public PauseManager pauseManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,25 +29,26 @@ public class Enemy100 : MonoBehaviour
     // Update is called once per frame
      void Update()
     {
-        
-        float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
-
-
-        //Om den är tillräckligt nära så ska den sluta gå
-        if (distanceToTarget >= stopDistance)
+        if (pauseManager.paused == false)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, movingSpeed * Time.deltaTime);
+            float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
 
-        }
-        else if(Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
-            //Shoot();
-        }
 
-        
-        transform.LookAt(targetTransform);
-        
+            //Om den är tillräckligt nära så ska den sluta gå
+            if (distanceToTarget >= stopDistance)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, movingSpeed * Time.deltaTime);
+
+            }
+            else if (Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                //Shoot();
+            }
+
+
+            transform.LookAt(targetTransform);
+        }
     }
     void Shoot()
     {

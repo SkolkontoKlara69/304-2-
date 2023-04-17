@@ -19,6 +19,8 @@ public class PauseManager : MonoBehaviour
     /// 3. skriv en if-sats i den fil du vill ha funktionen som beror på om det är pausat och skriv vilkoret:
     /// pauseManager.paused == false
     /// om du vill att allting som är i if-satsen körs när spelet inte är pausat. 
+    /// 
+    /// KOM VERKLIGEN IHÅG ATT LÄGGA IN PAUSEMANAGERN I ALLT SOM KAN PAUSAS, ANNARS KOMMER DE INTE ATT FUNGERA ALLS
     /// </summary>
 
 

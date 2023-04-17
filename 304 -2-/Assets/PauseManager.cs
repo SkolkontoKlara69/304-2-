@@ -6,7 +6,9 @@ public class PauseManager : MonoBehaviour
 {
 
     public bool paused;
-
+    
+    //vilken knapp som ska tryckas ned (just nu P)
+    KeyCode pauseButton = KeyCode.P;
 
     /// <summary>
     /// För att lägga in ett villkor i en annan kod för att bero på om spelet är pausat gör man såhär:
@@ -27,7 +29,7 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(pauseButton))
         {
             if (paused == false)
             {

@@ -21,6 +21,14 @@ public class PauseManager : MonoBehaviour
     /// om du vill att allting som är i if-satsen körs när spelet inte är pausat. 
     /// 
     /// KOM VERKLIGEN IHÅG ATT LÄGGA IN PAUSEMANAGERN I ALLT SOM KAN PAUSAS, ANNARS KOMMER DE INTE ATT FUNGERA ALLS
+    /// 
+    /// 
+    /// 
+    /// DOCK BEHÖVS DETTA ENDAST FÖR SAKER SOM INTE HAR MED TID OCH GÖRA, EFTERSOM PAUS-FUNKTIONEN ALLTID GÖR SÅ TIDEN STÅR STILL. DÅ SLUTAR FYSIKEN ATT RÖRA SIG OCH SÅDANT.
+    /// TROR DOCK ATT GUI FORTFARANDE FUNGERAR EFTERSOM LOOKAROUND SKULLE FUNKA NÄR TIDEN STÅR STILL. 
+    /// 
+    /// 
+    /// ALTERNATIVT KAN DU BARA LÄGGA IN EN IF-STATS SOM ÄR if(Time.timeScale == 0) så är det samma som om spelet är pausat. 
     /// </summary>
 
 
@@ -35,18 +43,17 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(pauseButton))
         {
-            if (paused == false)
-            {
-                paused = true;
-
-            }
-            else
-            {
-                paused = false;
-
-            }
+            paused = !paused;
             
+        }
 
+        if (paused == true)
+        {
+            Time.timeScale = 0f; // Pausar spelet (tiden)
+        }
+        else
+        {
+            Time.timeScale = 1f; // Återupptar spelet (tiden går normalt)
         }
     }
 }

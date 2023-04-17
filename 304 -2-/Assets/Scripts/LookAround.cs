@@ -23,7 +23,7 @@ public class LookAround : MonoBehaviour
     private void Update()
     {
         if (pauseManager.paused == false)
-        {
+        { 
             // get mouse input
 
             float mouseX = Input.GetAxisRaw("Mouse X") * sensX;

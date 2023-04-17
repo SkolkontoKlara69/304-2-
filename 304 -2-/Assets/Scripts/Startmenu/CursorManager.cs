@@ -24,8 +24,8 @@ public class CursorManager : MonoBehaviour
     
     private void OnGUI()
     {
-
-        if (SceneManager.GetActiveScene().name != "Start menu" || pauseManager.paused == false)
+        //|| pauseManager.paused == false
+        if (SceneManager.GetActiveScene().name != "Start menu" )
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -35,12 +35,13 @@ public class CursorManager : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+        
         if (pauseManager.paused == true)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-
+        
 
 
     }

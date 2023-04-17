@@ -12,10 +12,20 @@ public class ButtonManager : MonoBehaviour
     int pressNmbC;
     int pressNmbM;
 
+
+    public GameObject settingsMenuObj;
+
+    public void Start()
+    {
+         settingsMenuObj.SetActive(false);
+    }
+
     public void OnStartButtonPress()
     {
         pressNmbS = DebugLogPressNmb("Start", pressNmbS);
         SceneManager.LoadScene("Level Selector");
+        
+        settingsMenuObj.SetActive(false);
     }
 
 
@@ -36,6 +46,11 @@ public class ButtonManager : MonoBehaviour
     {
         pressNmbM = DebugLogPressNmb("Start Menu", pressNmbM);
         SceneManager.LoadScene("Start menu");
+    }
+
+    public void OnSettingsPress()
+    {
+        settingsMenuObj.SetActive(true);
     }
 
     int DebugLogPressNmb(string buttonName, int pressNmb)

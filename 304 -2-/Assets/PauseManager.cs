@@ -6,12 +6,14 @@ public class PauseManager : MonoBehaviour
 {
 
     public bool paused;
-    
+    public bool settingsMenu;
+
     //vilken knapp som ska tryckas ned (just nu P)
     KeyCode pauseButton = KeyCode.P;
 
 
-    public GameObject pauseMenu; 
+    public GameObject pauseMenu;
+    public GameObject settingsMenuObj;
 
     /// <summary>
     /// För att lägga in ett villkor i en annan kod för att bero på om spelet är pausat gör man såhär:
@@ -39,6 +41,7 @@ public class PauseManager : MonoBehaviour
     void Start()
     {
         paused = false;
+        settingsMenuObj.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,14 +59,16 @@ public class PauseManager : MonoBehaviour
 
             //Gör canvasen för paus-menyn synlig
             pauseMenu.SetActive(true); 
+
         }
         else
         {
             Time.timeScale = 1f; // Återupptar spelet (tiden går normalt)
 
-
-            //Gör canvasen för paus-menyn osynlig
+            //Gör canvasen för paus-menyn osynlig och settings-menyn osynlig
             pauseMenu.SetActive(false);
+            settingsMenuObj.SetActive(false);
         }
+
     }
 }

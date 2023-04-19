@@ -35,6 +35,11 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
+    public void OnPausMenu()
+    {
+        settingsMenuObj.SetActive(false);
+    }
+
     public void OnExitButtonPress()
     {
         pressNmbE = DebugLogPressNmb("Exit", pressNmbE);

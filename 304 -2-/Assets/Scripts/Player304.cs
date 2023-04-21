@@ -26,6 +26,8 @@ public class Player304 : MonoBehaviour
 
     public float playerHeight;
 
+    public float speed;
+
     bool readyToJump;
     public float jumpForce;
     public float jumpCooldown;
@@ -53,6 +55,7 @@ public class Player304 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (pauseManager.paused == false)
         {
             if (isGrounded == true)
@@ -65,7 +68,7 @@ public class Player304 : MonoBehaviour
             }
 
             isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
+            
             //WASD
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");

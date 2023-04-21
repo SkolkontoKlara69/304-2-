@@ -38,9 +38,7 @@ public class Player304 : MonoBehaviour
 
     public float groundDrag;
 
-    //Pause script
     public PauseManager pauseManager;
-
     // Start is called before the first frame update
     void Start()
     {

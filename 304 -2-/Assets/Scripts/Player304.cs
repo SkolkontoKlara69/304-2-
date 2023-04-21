@@ -40,6 +40,7 @@ public class Player304 : MonoBehaviour
 
     public float groundDrag;
 
+    public PauseManager pauseManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,49 +55,63 @@ public class Player304 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        //WASD
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
-
-        movement *= movingSpeed;
-
-        rigidbody.MovePosition(transform.position + movement * Time.deltaTime);
-
-        rotationY += Input.GetAxis("Mouse X") * sensitivity;
-        transform.localEulerAngles = new Vector3(rotationX, rotationY, 0);
-
-        Vector3 playerDirection = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
-
-        moveDirection = orientation.forward.normalized * verticalInput + orientation.right * horizontalInput;
-
-        rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f, ForceMode.Force);
-
-        if (isGrounded == true)
+        if (pauseManager.paused == false)
         {
+            if (isGrounded == true)
+            {
+                rigidbody.drag = groundDrag;
+            }
+            else
+            {
+                rigidbody.drag = 0;
+            }
+
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+            
+            //WASD
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+
+            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+
+            movement *= movingSpeed;
+
+            rigidbody.MovePosition(transform.position + movement * Time.deltaTime);
+
+            rotationY += Input.GetAxis("Mouse X") * sensitivity;
+            transform.localEulerAngles = new Vector3(rotationX, rotationY, 0);
+
+            Vector3 playerDirection = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+
+            moveDirection = orientation.forward.normalized * verticalInput + orientation.right * horizontalInput;
+
             rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f, ForceMode.Force);
-        }
-        else if (isGrounded == false)
-        {
-            rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f * airMultiplier, ForceMode.Force);
-        }
 
-        if (Input.GetKey(jumpKey) && readyToJump == true && isGrounded)
-        {
-            Jump();
+            if (isGrounded == true)
+            {
+                rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f, ForceMode.Force);
+            }
+            else if (isGrounded == false)
+            {
+                rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f * airMultiplier, ForceMode.Force);
+            }
 
-            readyToJump = false;
+            if (Input.GetKey(jumpKey) && readyToJump == true /*&& isGrounded*/)
+            {
+                Jump();
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                readyToJump = false;
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
         }
+        
     }
 
     private void Jump()
     {
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpForce*Time.deltaTime, rigidbody.velocity.z);
 
         rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }

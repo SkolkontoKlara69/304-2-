@@ -6,61 +6,48 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    public GameObject player;
-    public Text sensitivityText;
+    //----SENSITIVITY----
+    public LookAround lookAroundScript;
+    public Player304 player304Script;
 
-    public TextMeshProUGUI myTextMeshPro;
+    public Slider senseSlider;
+    public TextMeshProUGUI senseNmbTxt;
 
-    float screenNmb;
+    public float senseSlNmb;
+
+    //----FOV----
+    public TextMeshProUGUI fovNmbTxt;
+    public Slider fovSlider;
+    public float fovNmb;
 
     public void Start()
     {
-        sensitivityText = GetComponent<Text>();
-        myTextMeshPro.text = "";
+        senseNmbTxt.text = "";
+        senseSlNmb = 5;
+        fovNmb = 60;
     }
 
     private void Update()
     {
-        // myTextMeshPro.text = "Hej";
-        screenNmb = player.GetComponent<LookAround>().sensX;
-        myTextMeshPro.text = screenNmb.ToString();
+        // --SENSITIVITY--
+        //Avrundar sensen och ger 3 värdesiffror (om vill ha fyra ändra 100 till 1000), sedan displayar siffran
+        senseSlNmb = Mathf.RoundToInt(100 * senseSlider.value);
+        senseNmbTxt.text = (senseSlNmb/100).ToString();
+        SetSensitivity();
+
+        //--FOV--
+        fovNmb = Mathf.RoundToInt(fovSlider.value);
+        fovNmbTxt.text = fovNmb.ToString();
+        Camera.main.fieldOfView = fovNmb;
     }
 
-    public void SetSensitivity(float senseNmb)
+
+    public void SetSensitivity()
     {
-        //GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        // Hämta en referens till spelarobjektets PlayerController-script.
-        LookAround lookAroundScript = player.GetComponent<LookAround>();
-        Player304 player304Script = player.GetComponent<Player304>();
-
         //Ändra sense
-        lookAroundScript.sensX = senseNmb;
-        lookAroundScript.sensY = senseNmb;
-        player304Script.sensitivity = senseNmb;
-
-        screenNmb = lookAroundScript.sensX;
-        screenNmb = senseNmb;
-
-        /*
-        float screenNmb = 15f;
-        myTextMeshPro.text = ": " + screenNmb;
-        */
-        //UpdateSensitivityText(senseNmb);
-    }
-    void UpdateSensitivityText(float screenNmb)
-    {
-        /*
-        GameObject senseTextObj = GameObject.FindGameObjectWithTag("SenseNmb");
-        screenNmb = 15;
-        Text senseText = senseTextObj.GetComponent<Text>();
-
-        senseText.text = screenNmb.ToString();*/
-
-
-    }
-    private void OnGUI()
-    {
-        //Display(screenNmb.ToString());
+        senseSlNmb = senseSlNmb / 100;
+        lookAroundScript.sensX = senseSlNmb;
+        lookAroundScript.sensY = senseSlNmb;
+        player304Script.sensitivity = senseSlNmb;
     }
 }

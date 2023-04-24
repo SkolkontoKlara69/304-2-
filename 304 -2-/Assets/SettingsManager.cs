@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SettingsManager : MonoBehaviour
 {
     //----SENSITIVITY----
+    [Header("Sensitivity")]
     public LookAround lookAroundScript;
     public Player304 player304Script;
 
@@ -16,9 +17,13 @@ public class SettingsManager : MonoBehaviour
     public float senseSlNmb;
 
     //----FOV----
+    [Header("FOV")]
     public TextMeshProUGUI fovNmbTxt;
     public Slider fovSlider;
     public float fovNmb;
+
+   
+    //-Hold to zoom-
 
     public void Start()
     {
@@ -38,9 +43,10 @@ public class SettingsManager : MonoBehaviour
         //--FOV--
         fovNmb = Mathf.RoundToInt(fovSlider.value);
         fovNmbTxt.text = fovNmb.ToString();
-        Camera.main.fieldOfView = fovNmb;
+        SetFov();
+        
+        
     }
-
 
     public void SetSensitivity()
     {
@@ -49,5 +55,17 @@ public class SettingsManager : MonoBehaviour
         lookAroundScript.sensX = senseSlNmb;
         lookAroundScript.sensY = senseSlNmb;
         player304Script.sensitivity = senseSlNmb;
+    }
+    void SetFov()
+    {
+        float zoomFov = fovNmb - 0.2f * fovNmb;
+        if (Input.GetKey(KeyCode.V))
+        {
+            Camera.main.fieldOfView = zoomFov;
+        }
+        else
+        {
+            Camera.main.fieldOfView = fovNmb;
+        }
     }
 }

@@ -60,7 +60,7 @@ public class Player304 : MonoBehaviour
         //isGrounded = true;
         jump = new Vector3(0.0f, 2.0f, 0.0f);
 
-        sprintSpeed = movingSpeed + sprintMultiplier;
+        sprintSpeed = normalSpeed + sprintMultiplier;
     }
 
     void OnCollisionStay()

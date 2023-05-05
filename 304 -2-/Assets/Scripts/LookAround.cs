@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 
 public class LookAround : MonoBehaviour
 {
     public float sensX;
     public float sensY;
+    public float fov;
+    public float zoomFov;
 
     public Transform orientation;
 
@@ -37,6 +39,9 @@ public class LookAround : MonoBehaviour
             // rotate cam and orientation
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+            
         }
     }
+    
 }

@@ -24,10 +24,18 @@ public class SettingsManager : MonoBehaviour
 
 
     //-Hold to zoom-
+    [Header("Zoom")]
     public bool holdZoom;
     public bool isZooming;
     public Toggle zoomToggle;
     KeyCode zoomKey = KeyCode.V;
+
+
+    //---Change pause button---
+    [Header("Set Pause Button")]
+    Event e = Event.current;
+
+
     public void Start()
     {
         senseNmbTxt.text = "";
@@ -50,7 +58,6 @@ public class SettingsManager : MonoBehaviour
         fovNmbTxt.text = fovNmb.ToString();
         SetFov();
 
-        //--Zoom--
         
 
     }
@@ -67,6 +74,20 @@ public class SettingsManager : MonoBehaviour
     public void HoldZoomToggle(bool toggeValue)
     {
         holdZoom = toggeValue;
+    }
+
+    public void OnChangePauseKeyPress()
+    {
+        
+        zoomKey = e.keyCode;
+    }
+    public void OnGUI()
+    {
+        e = Event.current;
+        if (e.isKey)
+        {
+            Debug.Log("Detected key code: " + e.keyCode);
+        }
     }
 
     void SetFov()
@@ -105,4 +126,6 @@ public class SettingsManager : MonoBehaviour
         }
         
     }
+
+
 }

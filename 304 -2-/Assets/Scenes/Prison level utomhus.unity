@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15305,7 +15305,7 @@ Rigidbody:
   m_GameObject: {fileID: 7506493216156628536}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -15338,21 +15338,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f97b88bd7763e4187b60175eae065a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeed: 3
+  movingSpeed: 1
   position: {x: 0, y: 0, z: 0}
+  jump: {x: 0, y: 0, z: 0}
   rigidbody: {fileID: 7506493216156628538}
   healthPoints: 304
   sensitivity: 5
   orientation: {fileID: 1291008067}
   playerHeight: 2
-  jumpForce: 10
-  jumpCooldown: 1
-  airMultiplier: 2
+  speed: 0
+  jumpForce: 5
+  jumpCooldown: 2
+  airMultiplier: 0
+  isJumping: 0
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   jumpKey: 32
   groundDrag: 1
+  sprintSpeed: 0
+  sprintMultiplier: 0
+  normalSpeed: 0
   pauseManager: {fileID: 1777563168}
 --- !u!23 &7510718277571591880
 MeshRenderer:

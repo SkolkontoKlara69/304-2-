@@ -8,6 +8,7 @@ public class Player304 : MonoBehaviour
 {
     public float movingSpeed = 10f;
     public Vector3 position;
+    public Vector3 jump;
 
     //public Transform transform;
     public Rigidbody rigidbody;
@@ -17,7 +18,7 @@ public class Player304 : MonoBehaviour
 
     float rotationX = -90f;
     float rotationY = 0f;
-    
+
     public float sensitivity;
 
     Vector3 moveDirection;
@@ -26,10 +27,13 @@ public class Player304 : MonoBehaviour
 
     public float playerHeight;
 
+    public float speed;
+
     bool readyToJump;
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public bool isJumping = false;
 
     bool isGrounded;
     public LayerMask whatIsGround;
@@ -38,7 +42,11 @@ public class Player304 : MonoBehaviour
 
     public float groundDrag;
 
+    public float sprintSpeed;
+    public float sprintMultiplier;
+    public float normalSpeed;
     public PauseManager pauseManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +55,16 @@ public class Player304 : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         defaultColliderHeight = capsuleCollider.height;
 
+        Physics.gravity = new Vector3(0, -30f, 0);
+
+        //isGrounded = true;
+        jump = new Vector3(0.0f, 2.0f, 0.0f);
+
+        sprintSpeed = movingSpeed + sprintMultiplier;
+    }
+
+    void OnCollisionStay()
+    {
         isGrounded = true;
     }
 
@@ -59,12 +77,17 @@ public class Player304 : MonoBehaviour
             {
                 rigidbody.drag = groundDrag;
             }
-            else
+            /*else
             {
                 rigidbody.drag = 0;
-            }
+            }*/
+            //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                rigidbody.AddForce(jump * jumpForce, ForceMode.Impulse);
+                isGrounded = false;
+            }
 
             //WASD
             float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -94,21 +117,36 @@ public class Player304 : MonoBehaviour
                 rigidbody.AddForce(moveDirection.normalized * movingSpeed * 10f * airMultiplier, ForceMode.Force);
             }
 
-            if (Input.GetKey(jumpKey) && readyToJump == true /*&& isGrounded*/)
+            if(Input.GetKey(KeyCode.LeftShift) && isGrounded)
+            {
+                movingSpeed = sprintSpeed;
+            }
+            else
+            {
+                movingSpeed = normalSpeed;
+            }
+
+            /*if (Input.GetKey(jumpKey) && readyToJump == true && isGrounded)
             {
                 Jump();
 
                 readyToJump = false;
 
                 Invoke(nameof(ResetJump), jumpCooldown);
-            }
+            }*/
         }
-        
     }
-
+        
     private void Jump()
     {
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpForce*Time.deltaTime, rigidbody.velocity.z);
+        if (isJumping && Time.deltaTime >= jumpCooldown)
+        {
+            rigidbody.velocity = new Vector3(rigidbody.velocity.x, 5f, rigidbody.velocity.z);
+            isJumping = true;
+            //StartCoroutine(ResetJump());
+        }
+
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpForce * Time.deltaTime, rigidbody.velocity.z);
 
         rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
@@ -119,7 +157,7 @@ public class Player304 : MonoBehaviour
     }
 
     public void TakeDamage(float damage)
-    {
+    { 
         healthPoints = -damage;
         Debug.Log("aj");
     }

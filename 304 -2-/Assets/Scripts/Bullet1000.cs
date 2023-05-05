@@ -94,11 +94,11 @@ public class Bullet1000 : MonoBehaviour
             Destroy(gameObject, despawnRate);
         }
 
-        //force = new Vector3 (- shooter.newDirection.x, - shooter.newDirection.y, - shooter.newDirection.z);
+        //force = (- shooter.newDirection.x, - shooter.newDirection.y, - shooter.newDirection.z);
         //force = -newDirection;
         //rb.AddForce(force);
 
-        rb?.AddRelativeForce(force);
+        rb.AddRelativeForce(force);
 
         HitPlayer();
 
@@ -108,10 +108,9 @@ public class Bullet1000 : MonoBehaviour
         float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
         float distanceToFloor = transform.position.y - floorTransform.position.y;
 
-        if ((distanceToTarget < hitbox) && (target.name == "Player304") && (hit == false) && (distanceToFloor > 0.01f))
+        if (distanceToTarget < hitbox && target.name == "Player304" && hit == false && distanceToFloor > 0.5f)
         {
             player.TakeDamage(damage);
-            Debug.Log("döda mig nu snälla jag ber detta är värre än helvettet och snälla från botten av mitt hjärta så önskar jag att ingen ska någonsin behöva gå igenom detta igen");
             hit = true;
         }
     }

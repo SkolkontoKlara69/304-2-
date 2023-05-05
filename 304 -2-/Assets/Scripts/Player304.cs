@@ -2,8 +2,6 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 [RequireComponent(typeof(MeshCollider))]
 public class Player304 : MonoBehaviour
@@ -55,6 +53,8 @@ public class Player304 : MonoBehaviour
         isGrounded = true;
 
          9979cc0 (Hp screen)
+        meshCollider = GetComponent<MeshCollider>();
+        //defaultColliderHeight = meshCollider.height;
     }
 
     // Update is called once per frame

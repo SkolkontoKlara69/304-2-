@@ -5,9 +5,11 @@ using UnityEngine;
 public class LaunchProjectile : MonoBehaviour
 {
     public GameObject projectile;
-    public float launchVelocity = 700f;
+    public float launchVelocity;
 
     public GameObject shooter;
+
+    public Rigidbody rb;
 
     private float nextFire;
     public float fireRate;
@@ -29,9 +31,10 @@ public class LaunchProjectile : MonoBehaviour
             GameObject ball = Instantiate(projectile, transform.position, transform.rotation);
             damage = ball.GetComponent<BulletPfbScript>().damage;
 
-            ball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3 (0, 0, launchVelocity));
-        }
+            //rb.AddRelativeForce(launchVelocity, 0, 0);
 
+            ball.GetComponent<Rigidbody>().AddRelativeForce(0, 0, launchVelocity);
+        }
 
         
     }

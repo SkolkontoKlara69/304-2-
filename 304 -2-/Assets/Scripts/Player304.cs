@@ -2,8 +2,6 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 [RequireComponent(typeof(MeshCollider))]
 public class Player304 : MonoBehaviour
@@ -21,6 +19,7 @@ public class Player304 : MonoBehaviour
     float rotationY = 0f;
     
     public float sensitivity;
+
 
     Vector3 moveDirection;
 
@@ -67,6 +66,8 @@ public class Player304 : MonoBehaviour
         isGrounded = true;
 
  Stashed changes
+        meshCollider = GetComponent<MeshCollider>();
+        //defaultColliderHeight = meshCollider.height;
     }
 
     // Update is called once per frame

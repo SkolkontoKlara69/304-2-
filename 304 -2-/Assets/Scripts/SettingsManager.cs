@@ -22,14 +22,27 @@ public class SettingsManager : MonoBehaviour
     public Slider fovSlider;
     public float fovNmb;
 
-   
+
     //-Hold to zoom-
+    [Header("Zoom")]
+    public bool holdZoom;
+    public bool isZooming;
+    public Toggle zoomToggle;
+    KeyCode zoomKey = KeyCode.V;
+
+
+    //---Change pause button---
+    [Header("Set Pause Button")]
+    Event e = Event.current;
+
 
     public void Start()
     {
         senseNmbTxt.text = "";
         senseSlNmb = 5;
         fovNmb = 60;
+        isZooming = false;
+        holdZoom = true;
     }
 
     private void Update()
@@ -37,15 +50,16 @@ public class SettingsManager : MonoBehaviour
         // --SENSITIVITY--
         //Avrundar sensen och ger 3 värdesiffror (om vill ha fyra ändra 100 till 1000), sedan displayar siffran
         senseSlNmb = Mathf.RoundToInt(100 * senseSlider.value);
-        senseNmbTxt.text = (senseSlNmb/100).ToString();
+        senseNmbTxt.text = (senseSlNmb / 100).ToString();
         SetSensitivity();
 
         //--FOV--
         fovNmb = Mathf.RoundToInt(fovSlider.value);
         fovNmbTxt.text = fovNmb.ToString();
         SetFov();
+
         
-        
+
     }
 
     public void SetSensitivity()
@@ -56,16 +70,62 @@ public class SettingsManager : MonoBehaviour
         lookAroundScript.sensY = senseSlNmb;
         player304Script.sensitivity = senseSlNmb;
     }
+
+    public void HoldZoomToggle(bool toggeValue)
+    {
+        holdZoom = toggeValue;
+    }
+
+    public void OnChangePauseKeyPress()
+    {
+        
+        zoomKey = e.keyCode;
+    }
+    public void OnGUI()
+    {
+        e = Event.current;
+        if (e.isKey)
+        {
+            Debug.Log("Detected key code: " + e.keyCode);
+        }
+    }
+
     void SetFov()
     {
         float zoomFov = fovNmb - 0.2f * fovNmb;
-        if (Input.GetKey(KeyCode.V))
+
+        if (holdZoom == true)
         {
-            Camera.main.fieldOfView = zoomFov;
+            //Zooms when the key is down
+            if (Input.GetKey(zoomKey))
+            {
+                Camera.main.fieldOfView = zoomFov;
+            }
+            else
+            {
+                Camera.main.fieldOfView = fovNmb;
+            }
         }
         else
         {
-            Camera.main.fieldOfView = fovNmb;
+            //Changes if the player is zooming or not
+            if (Input.GetKeyDown (zoomKey))
+            {
+                isZooming = !isZooming;
+            }
+
+            //Sets the fov to zoom or not
+            if (isZooming == true)
+            {
+                Camera.main.fieldOfView = zoomFov;
+            }
+            else
+            {
+                Camera.main.fieldOfView = fovNmb;
+            }
         }
+        
     }
+
+
 }

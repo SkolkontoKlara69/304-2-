@@ -34,7 +34,7 @@ public class LookAround : MonoBehaviour
             yRotation += mouseX;
 
             xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 35f);
+            xRotation = Mathf.Clamp(xRotation, -90f, 90);
 
             // rotate cam and orientation
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);

@@ -11,6 +11,7 @@ public class BulletPfbScript : MonoBehaviour
     public Transform targetTransform;
     public Collider targetCollider;
     public float hitbox;
+    
 
     //   ---BULLET---
     [Header("Bullet")]

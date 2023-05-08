@@ -13,6 +13,7 @@ public class LaunchProjectile : MonoBehaviour
     public float fireRate;
     public float damage;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class LaunchProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextFire)
+        if (Time.time > nextFire )
         {
             nextFire = Time.time + fireRate;
             GameObject ball = Instantiate(projectile, transform.position, transform.rotation);

@@ -27,8 +27,7 @@ public class Enemy100 : MonoBehaviour
     // Update is called once per frame
      void Update()
     {
-        
-        float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
+       float distanceToTarget = Vector3.Distance(transform.position, targetTransform.position);
 
 
         //Om den är tillräckligt nära så ska den sluta gå
@@ -37,15 +36,14 @@ public class Enemy100 : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, movingSpeed * Time.deltaTime);
 
         }
-        else if(Time.time > nextFire)
+        else if (Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             //Shoot();
         }
 
-        
+
         transform.LookAt(targetTransform);
-        
     }
     void Shoot()
     {

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CursorManager : MonoBehaviour
 {
+    public PauseManager pauseManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +18,14 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+
     }
+    
     private void OnGUI()
     {
-        if (SceneManager.GetActiveScene().name != "Start menu")
+        //|| pauseManager.paused == false
+        if (SceneManager.GetActiveScene().name != "Start menu" )
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -31,5 +36,14 @@ public class CursorManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
         
+        if (pauseManager.paused == true)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
+
+
     }
+    
 }

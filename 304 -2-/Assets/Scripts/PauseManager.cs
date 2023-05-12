@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     public bool settingsMenu;
 
     //vilken knapp som ska tryckas ned (just nu P)
-    public KeyCode pauseButton;
+    public KeyCode pauseKey;
 
 
     public GameObject pauseMenu;
@@ -42,13 +42,13 @@ public class PauseManager : MonoBehaviour
     {
         paused = false;
         settingsMenuObj.SetActive(false);
-        pauseButton = KeyCode.P;
+        pauseKey = KeyCode.P;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(pauseButton))
+        if (Input.GetKeyDown(pauseKey))
         {
             paused = !paused;
             

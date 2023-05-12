@@ -31,9 +31,6 @@ public class SettingsManager : MonoBehaviour
     KeyCode zoomKey;
 
 
-    
-
-
     //--Bindning keyes-
     [Header("Bindning keyes")]
     public PauseManager pauseManager;
@@ -43,7 +40,10 @@ public class SettingsManager : MonoBehaviour
     public TextMeshProUGUI activeZoomKeyText;
     public GameObject instructionsText;
     private string lastPushedBindButton;
-    
+
+    //PauseText
+    public TextMeshProUGUI pressActivePauseKeytext;
+
 
     public void Start()
     {
@@ -67,7 +67,7 @@ public class SettingsManager : MonoBehaviour
         SetFov();
 
         //Bindning keyes
-        activePauseKeyText.text = "Active Pause Key: " + pauseManager.pauseButton.ToString();
+        activePauseKeyText.text = "Active Pause Key: " + pauseManager.pauseKey.ToString();
         activeZoomKeyText.text = "Active Zoom Key: " + zoomKey.ToString();
 
     }
@@ -125,6 +125,7 @@ public class SettingsManager : MonoBehaviour
     public void OnGUI()
     {
         GetNewKey();
+        pressActivePauseKeytext.text = "Press " + pauseManager.pauseKey + " to pause the game";
     }
 
     private void GetNewKey()
@@ -162,7 +163,7 @@ public class SettingsManager : MonoBehaviour
     {
         if (lastPushedBindButton == "Pause")
         {
-            pauseManager.pauseButton = newKey;
+            pauseManager.pauseKey = newKey;
         }
         else if (lastPushedBindButton == "Zoom")
         {

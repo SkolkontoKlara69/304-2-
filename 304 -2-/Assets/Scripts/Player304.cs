@@ -2,6 +2,8 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 [RequireComponent(typeof(MeshCollider))]
 public class Player304 : MonoBehaviour
@@ -53,10 +55,10 @@ public class Player304 : MonoBehaviour
 
         isGrounded = true;
 
-         9979cc0 (Hp screen)
+            (Hp screen)
 
- Updated upstream
- c7f9cd0 (Revert "Revert "Hp screen"")
+ 
+         (Revert "Revert "Hp screen"")
         meshCollider = GetComponent<MeshCollider>();
         //defaultColliderHeight = meshCollider.height;
 
@@ -65,15 +67,20 @@ public class Player304 : MonoBehaviour
 
         isGrounded = true;
 
- Stashed changes
+
+
         meshCollider = GetComponent<MeshCollider>();
         //defaultColliderHeight = meshCollider.height;
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        defaultColliderHeight = capsuleCollider.height;
+
+        isGrounded = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
- HEAD
 
         if (pauseManager.paused == false)
         {
@@ -86,9 +93,9 @@ public class Player304 : MonoBehaviour
                 rigidbody.drag = 0;
             }
 
- Updated upstream
+ 
 
- c7f9cd0 (Revert "Revert "Hp screen"")
+     (Revert "Revert "Hp screen"")
         
 
         if (isGrounded == true)
@@ -102,14 +109,11 @@ public class Player304 : MonoBehaviour
 
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
- HEAD
-
- Stashed changes
- c7f9cd0 (Revert "Revert "Hp screen"")
+  (Revert "Revert "Hp screen"")
         //WASD
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
- 9979cc0 (Hp screen)
+  (Hp screen)
 
             isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -121,8 +125,6 @@ public class Player304 : MonoBehaviour
 
             movement *= movingSpeed;
 
-
- HEAD
             rigidbody.MovePosition(transform.position + movement * Time.deltaTime);
 
             rotationY += Input.GetAxis("Mouse X") * sensitivity;
@@ -155,9 +157,13 @@ public class Player304 : MonoBehaviour
         
 
 
- Updated upstream
+ 
 
- c7f9cd0 (Revert "Revert "Hp screen"")
+  (Revert "Revert "Hp screen"")
+
+ 
+
+ 
         Vector3 playerDirection = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
 
         moveDirection = orientation.forward.normalized * verticalInput + orientation.right * horizontalInput;
@@ -195,10 +201,14 @@ public class Player304 : MonoBehaviour
     {
         readyToJump = true;
  HEAD
-        9979cc0 (Hp screen)
+ HEAD
+         (Hp screen)
 
  Stashed changes
      (Revert "Revert "Hp screen"")
+
+ Stashed changes
+ 
     }
 
     public void TakeDamage(float damage)
